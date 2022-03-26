@@ -31,8 +31,8 @@ endif
 
 ARMBIAN_PKG_%:
 	@( if [ ! -f "$(DL)/$($(@))" ]; then \
-		$(WGET) $(ARMBIAN_URL_BASE)/$($(@)) ; \
-		$(WGET) $(ARMBIAN_URL_BASE)/$($(@)).sha ; \
+		$(AXEL) $(ARMBIAN_URL_BASE)/$($(@)) ; \
+		$(AXEL) $(ARMBIAN_URL_BASE)/$($(@)).sha ; \
 	fi )
 
 ARMBIAN_PKG_%_CLEAN:
