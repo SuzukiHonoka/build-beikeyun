@@ -22,7 +22,7 @@ jobs:
         sudo apt-get upgrade -y
         sudo apt-get install p7zip-full mtools jq u-boot-tools html-xml-utils squashfs-tools axel -y
 
-    - name: Bilud Armbian
+    - name: Build Armbian
       run: |
         make build_armbian=y build
 
