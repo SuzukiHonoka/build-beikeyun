@@ -24,7 +24,7 @@ ARMBIAN_PKG_UBUNTU := Armbian_21.02.3_Rock64_focal_current_5.10.21.img.xz
 ARMBIAN_PKG_DEBIAN_XFCE_LEGACY := Armbian_21.02.3_Rock64_buster_legacy_4.4.213_xfce_desktop.img.xz
 ARMBIAN_PKG_DEBIAN := Armbian_21.02.3_Rock64_buster_current_5.10.21.img.xz
 ifneq ($(CI),)
-ARMBIAN_URL_BASE := https://mirrors.dotsrc.org/armbian-dl/rock64/archive
+ARMBIAN_URL_BASE := https://stpete-mirror.armbian.com/archive/rock64/archive/
 # ARMBIAN_URL_BASE := https://imola.armbian.com/dl/rock64/archive
 # ARMBIAN_URL_BASE := https://archive.armbian.com/rock64/archive
 # ARMBIAN_URL_BASE := https://armbian.tnahosting.net/dl/rock64/archive
