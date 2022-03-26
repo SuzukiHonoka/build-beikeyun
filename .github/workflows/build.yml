@@ -1,20 +1,16 @@
 name: Build Beikeyun
 
 on:
-  repository_dispatch:
-  workflow_dispatch:
-    inputs:
-      ssh:
-        description: 'SSH connection to Actions'
-        required: false
-        default: 'false'
-
-env:
-  TZ: Asia/Shanghai
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/build.yml'
+  watch:
+    types: [started]
 
 jobs:
   build:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-20.04
 
     steps:
     - name: Checkout
@@ -22,33 +18,16 @@ jobs:
 
     - name: Initialization environment
       run: |
-        sudo timedatectl set-timezone "$TZ"
         sudo apt-get update
+        sudo apt-get upgrade -y
         sudo apt-get install p7zip-full mtools jq u-boot-tools html-xml-utils squashfs-tools bsdtar axel -y
 
     - name: Bilud Armbian
       run: |
-        pwd
-        ls -l
         make build_armbian=y build
-        ls -l output
-
-    - name: Check space usage
-      if: (!cancelled())
-      run: df -hT
 
     - name: Upload output directory
       uses: actions/upload-artifact@main
       with:
         name: output
         path: output/
-
-    - name: SSH connection to Actions
-      uses: P3TERX/ssh2actions@v1.0.0
-      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
-
-    - name: Delete workflow runs
-      uses: GitRML/delete-workflow-runs@main
-      with:
-        retain_days: 1
-        keep_minimum_runs: 3
